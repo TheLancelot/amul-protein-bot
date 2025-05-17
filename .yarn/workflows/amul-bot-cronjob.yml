@@ -28,7 +28,7 @@ jobs:
           TWITTER_TOKEN_SECRET: ${{ secrets.TWITTER_TOKEN_SECRET }}
           TWILIO_ACCOUNT_SID : ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN : ${{ secrets.TWILIO_AUTH_TOKEN }}
-          MY_NUMBER: ${{ secrets.MY_NUMBER }}
+          MY_NUMBER: ${{ secrets.MY_NUMBER }} 
         run: python amul_bot.py
 
       - name: Commit state
