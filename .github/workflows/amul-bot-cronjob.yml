@@ -37,7 +37,7 @@ jobs:
         run: |
           git config --global user.name "bot"
           git config --global user.email "bot@example.com"
-          git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}
+          git remote set-url origin https://${{ secrets.GH_USERNAME }}:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}
           git add amul_prev_state.json
           git diff --cached --quiet || git commit -m "update state"
           git push
