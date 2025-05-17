@@ -29,7 +29,7 @@ jobs:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           MY_NUMBER: ${{ secrets.MY_NUMBER }} 
-        run: python amul_bot.py
+        run: python tweet.py
 
       - name: Commit state
         env:
