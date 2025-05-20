@@ -1,6 +1,7 @@
 import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 import json
 import time
 from config import AMUL_API, COOKIE
@@ -16,20 +17,18 @@ def get_amul_data_api():
         return None
 
 def get_amul_data_selenium():
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("window-size=1920,1080")
-    driver = webdriver.Chrome(options=chrome_options)
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("window-size=1920,1080")
+    driver = webdriver.Chrome(service=Service(), options=options)
     url = AMUL_API
     driver.get(url)
     time.sleep(3)
     response_text = driver.find_element("tag name", "pre").text if driver.find_elements("tag name", "pre") else driver.page_source
     try:
         data = json.loads(response_text)
-        print(url)
         print("Products fetched:", len(data.get("data", [])))
     except Exception as e:
         print("Failed to parse JSON:", e)
