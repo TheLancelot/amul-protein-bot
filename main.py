@@ -11,7 +11,7 @@ if __name__ == "__main__":
     tweet_text = generate_amul_tweet(tweet_data)
     if tweet_text:
         print(tweet_text)
-        # post_tweet(tweet_text)
+        post_tweet(tweet_text)
         # send_twilio_message(tweet_text)  # Uncomment to enable WhatsApp notification
         print("Successfully tweeted!")
     else:
