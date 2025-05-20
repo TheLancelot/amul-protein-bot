@@ -2,7 +2,7 @@ name: Amul Bot
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # every 2 hours UTC
+    - cron: '*/10 * * * *'  # every 10 mins
   workflow_dispatch:
 
 jobs:
