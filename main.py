@@ -5,7 +5,9 @@ if __name__ == "__main__":
     response = get_amul_data_api()
     if response:
         tweet_data = response["data"]
+
     else:
+        print("first api failed")
         selenium_data = get_amul_data_selenium()
         if len(selenium_data["data"]) == 0:
             raise Exception("Both APIs Failed")
