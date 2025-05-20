@@ -2,6 +2,10 @@ from amul_api import get_amul_data_api, get_amul_data_selenium
 from tweet_utils import generate_amul_tweet, post_tweet, send_twilio_message
 
 if __name__ == "__main__":
+    import os
+    from dotenv import load_dotenv
+    load_dotenv(override=True)
+    print(os.environ["HEADERS"])
     response = get_amul_data_api()
     if response:
         tweet_data = response["data"]
