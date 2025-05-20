@@ -29,6 +29,7 @@ def get_amul_data_selenium():
     response_text = driver.find_element("tag name", "pre").text if driver.find_elements("tag name", "pre") else driver.page_source
     try:
         data = json.loads(response_text)
+        print(url)
         print("Products fetched:", len(data.get("data", [])))
     except Exception as e:
         print("Failed to parse JSON:", e)

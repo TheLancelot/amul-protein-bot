@@ -7,7 +7,7 @@ if __name__ == "__main__":
         tweet_data = response["data"]
     else:
         selenium_data = get_amul_data_selenium()
-        if len(selenium_data) == 0:
+        if len(selenium_data["data"]) == 0:
             raise Exception("Both APIs Failed")
         tweet_data = selenium_data["data"] if selenium_data else []
     
