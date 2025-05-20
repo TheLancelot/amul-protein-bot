@@ -5,6 +5,7 @@ load_dotenv(override=True)
 
 COOKIE = os.environ["COOKIE"]
 AMUL_API= os.environ["AMUL_API"]
+print(os.environ["HEADERS"])
 HEADERS=json.loads(os.environ["HEADERS"])
 
 TWITTER_CONSUMER_KEY = os.environ["TWITTER_CONSUMER_KEY"]
