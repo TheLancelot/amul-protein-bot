@@ -2,7 +2,7 @@ name: Amul Bot
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # every 10 mins
+    - cron: '*/10 * * * *'  # every 30mins
   workflow_dispatch:
 
 jobs:
@@ -30,7 +30,9 @@ jobs:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
           MY_NUMBER: ${{ secrets.MY_NUMBER }} 
-        run: python tweet.py
+          AMUL_API : ${{ secrets.AMUL_API }} 
+          HEADERS : ${{ secrets.HEADERS }} 
+        run: python main.py
 
       - name: Commit state
         env:
