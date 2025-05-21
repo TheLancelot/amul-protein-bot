@@ -38,7 +38,7 @@ def get_amul_data_selenium():
      
     driver.get(url)
     time.sleep(3)
-    driver.get(url)
+
     try:
         pre_element = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.TAG_NAME, "pre"))

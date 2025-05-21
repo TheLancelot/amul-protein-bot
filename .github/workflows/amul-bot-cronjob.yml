@@ -23,7 +23,59 @@ jobs:
         uses: nanasess/setup-chromedriver@v2
 
       - name: Install dependencies
+        run: pip install -r requirements.txtname: Amul Bot
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'  # every 2 hours
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Set up Chrome and ChromeDriver
+        uses: browser-actions/setup-chrome@v1
+        with:
+          install-chromedriver: true
+          install-dependencies: true
+
+      - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Run bot
+        env:
+          COOKIE: ${{ secrets.cookie }}
+          TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
+          TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
+          TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          MY_NUMBER: ${{ secrets.MY_NUMBER }} 
+          AMUL_API: ${{ secrets.AMUL_API }} 
+          HEADERS: ${{ secrets.HEADERS }} 
+        run: python main.py
+
+      - name: Commit state
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          git config --global user.name "bot"
+          git config --global user.email "bot@example.com"
+          git remote set-url origin https://${{ secrets.GH_USERNAME }}:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}
+          git add amul_prev_state.json
+          git diff --cached --quiet || git commit -m "update state"
+          git push
+
 
       - name: Run bot
         env:
