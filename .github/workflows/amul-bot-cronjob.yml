@@ -19,8 +19,8 @@ jobs:
       - name: Set up Chrome and ChromeDriver
         uses: browser-actions/setup-chrome@v1
         with:
+          chrome-version: 136.0.7103.92
           install-chromedriver: true
-          install-dependencies: true
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -35,9 +35,9 @@ jobs:
           TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
-          MY_NUMBER: ${{ secrets.MY_NUMBER }} 
-          AMUL_API: ${{ secrets.AMUL_API }} 
-          HEADERS: ${{ secrets.HEADERS }} 
+          MY_NUMBER: ${{ secrets.MY_NUMBER }}
+          AMUL_API: ${{ secrets.AMUL_API }}
+          HEADERS: ${{ secrets.HEADERS }}
         run: python main.py
 
       - name: Commit state
