@@ -16,73 +16,27 @@ def get_amul_data_api():
         print("Failed to fetch data. Status code:", response.status_code)
         return None
 
-# def get_amul_data_selenium():
-#     options = webdriver.ChromeOptions()
-#     options.add_argument("--headless")
-#     options.add_argument("--no-sandbox")
-#     options.add_argument("--disable-dev-shm-usage")
-#     options.add_argument("window-size=1920,1080")
-#     driver = webdriver.Chrome(service=Service(), options=options)
-#     url = AMUL_API
-
-#     driver.get(url)
-#     time.sleep(3)
-#     response_text = driver.find_element("tag name", "pre").text if driver.find_elements("tag name", "pre") else driver.page_source
-    
-#     try:
-#         data = json.loads(response_text)
-#         print("Products fetched:", len(data.get("data", [])))
-#     except Exception as e:
-#         print("Failed to parse JSON:", e)
-#         data = None
-#     driver.quit()
-#     return data 
-
-import os
-import time
-import json
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
 def get_amul_data_selenium():
-    AMUL_API = os.environ.get("AMUL_API")
-    print("AMUL_API:", AMUL_API)
-
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("window-size=1920,1080")
-    options.binary_location = "/usr/bin/google-chrome"
+    driver = webdriver.Chrome(service=Service(), options=options)
+    AMUL_API="https://shop.amul.com/api/1/entity/ms.products?fields[name]=1&fields[brand]=1&fields[categories]=1&fields[collections]=1&fields[alias]=1&fields[sku]=1&fields[price]=1&fields[compare_price]=1&fields[original_price]=1&fields[images]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[inventory_quantity]=1&fields[net_quantity]=1&fields[num_reviews]=1&fields[avg_rating]=1&fields[inventory_low_stock_quantity]=1&fields[inventory_allow_out_of_stock]=1&fields[default_variant]=1&fields[variants]=1&fields[lp_seller_ids]=1&filters[0][field]=categories&filters[0][value][0]=protein&filters[0][operator]=in&filters[0][original]=1&facets=true&facetgroup=default_category_facet&limit=24&total=1&start=0&cdc=1m&substore=66505ff0998183e1b1935c75"
 
-    service = Service("/usr/local/bin/chromedriver")
-    driver = webdriver.Chrome(service=service, options=options)
-
+    url = AMUL_API
+     
+    driver.get(url)
+    time.sleep(3)
+    response_text = driver.find_element("tag name", "pre").text if driver.find_elements("tag name", "pre") else driver.page_source
+    
     try:
-        driver.get(AMUL_API)
+        data = json.loads(response_text)
+        print("Products fetched:", len(data.get("data", [])))
+    except Exception as e:
+        print("Failed to parse JSON:", e)
+        data = None
+    driver.quit()
+    return data 
 
-        # Wait for <pre> tag or fallback to delay
-        try:
-            WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.TAG_NAME, "pre"))
-            )
-        except:
-            time.sleep(3)
-
-        response_text = driver.find_element(By.TAG_NAME, "pre").text if driver.find_elements(By.TAG_NAME, "pre") else driver.page_source
-
-        try:
-            data = json.loads(response_text)
-            print("Products fetched:", len(data.get("data", [])))
-        except Exception as e:
-            print("Failed to parse JSON:", e)
-            print("Response snippet:", response_text[:500])
-            data = None
-
-    finally:
-        driver.quit()
-
-    return data
