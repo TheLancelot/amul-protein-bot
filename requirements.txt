@@ -3,3 +3,4 @@ requests
 selenium
 requests_oauthlib
 python-dotenv
+urllib

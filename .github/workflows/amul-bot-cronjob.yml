@@ -2,7 +2,8 @@ name: Amul Bot
 
 on:
   schedule:
-    - cron: '0 */2 * * *'  # every 2 hours
+    - cron: '*/30 * * * *'  # every 2 hours
+
   workflow_dispatch:
 
 jobs:
@@ -23,7 +24,6 @@ jobs:
           install-chromedriver: true
           install-dependencies: true
           
-
       - name: Install dependencies
         run: pip install -r requirements.txt
 
