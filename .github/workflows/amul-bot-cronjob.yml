@@ -21,6 +21,8 @@ jobs:
         with:
           chrome-version: 136.0.7103.92
           install-chromedriver: true
+          install-dependencies: true
+          
 
       - name: Install dependencies
         run: pip install -r requirements.txt
