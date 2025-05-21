@@ -37,7 +37,7 @@ def get_amul_data_selenium():
     url = AMUL_API
 
     base_url="https://shop.amul.com/en/browse/protein"
-    driver.get(base_url)
+    driver.get(url)
     time.sleep(3)
     print(driver.page_source)
     try:
