@@ -23,7 +23,7 @@ def get_amul_data_selenium():
     options = webdriver.ChromeOptions()
     # options.add_argument("--headless")
 #
-    options.add_argument("--headless=chrome")  # Use stable headless mode
+    options.add_argument("--headless")  # Use stable headless mode
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
@@ -37,6 +37,10 @@ def get_amul_data_selenium():
     url = AMUL_API
 
     base_url="https://shop.amul.com/en/browse/protein"
+    driver.get(base_url)
+    time.sleep(3)
+    print(driver.page_source)
+    
     driver.get(url)
     time.sleep(3)
     print(driver.page_source)
