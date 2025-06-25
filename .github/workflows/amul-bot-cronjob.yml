@@ -40,6 +40,12 @@ jobs:
           MY_NUMBER: ${{ secrets.MY_NUMBER }}
           AMUL_API: ${{ secrets.AMUL_API }}
           HEADERS: ${{ secrets.HEADERS }}
+          SUPABASE_URL : ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY : ${{ secrets.SUPABASE_KEY }}
+          app_password : ${{ secrets.app_password }}
+          bot_token : ${{ secrets.bot_token }}
+          channel_username : ${{ secrets.channel_username }}
+
         run: python main.py
 
       - name: Commit state
