@@ -5,3 +5,4 @@ requests_oauthlib
 python-dotenv
 urllib3
 httpx
+supabase

@@ -44,46 +44,110 @@ def has_changes(prev_data: list, curr_data: list) -> bool:
             return True
     return False
 
-def generate_amul_tweet(current_data, previous_data_path="amul_prev_state.json", low_stock_threshold=10, short_map=SHORT_NAME_MAP):
+# def generate_amul_tweet(current_data, previous_data_path="amul_prev_state.json", low_stock_threshold=10, short_map=SHORT_NAME_MAP):
+#     try:
+#         with open(previous_data_path, "r") as f:
+#             prev = json.load(f)
+#             prev_avail = {itm["name"]: itm["available"] for itm in prev}
+#     except FileNotFoundError:
+#         prev_avail = {}
+#     new_items = []
+#     normal_items = []
+#     low_items = []
+#     for itm in current_data:
+#         if int(itm["available"]) != 1:
+#             continue
+#         name = itm["name"]
+#         qty  = itm["inventory_quantity"]
+#         disp = short_map.get(name, name)
+#         was_avail = prev_avail.get(name, 0) == 1
+#         if not was_avail:
+#             new_items.append(disp)
+#         elif qty <= low_stock_threshold:
+#             low_items.append(disp)
+#         else:
+#             normal_items.append(disp)
+#     if not has_changes(prev, current_data):
+#         print("No changes- not updating json")
+#         return
+#     print("Saving new availability data")
+#     with open(previous_data_path, "w") as f:
+#         json.dump(current_data, f)
+#     lines = ["Amul Protein Stock Update 🐄\n","✅ Available:"]
+#     for d in new_items:
+#         lines.append(f"{d}🆕")
+#     for d in normal_items:
+#         lines.append(f"{d}")
+#     for d in low_items:
+#         lines.append(f"{d}⚠️")
+#     tweet = "\n".join(lines)
+#     if len(tweet) > 275:
+#         tweet = tweet[:270] + "tbc"
+#     return tweet
+
+def generate_amul_tweet(current_data,previous_data_path="amul_prev_state.json",low_stock_threshold=10,short_map=SHORT_NAME_MAP):
+    """
+    Compares current data with previous availability, generates a tweet if new products are available.
+    
+    Returns:
+        tweet_text (str | None),
+        newly_available_names (list of full product names),
+        current_data (to save if needed)
+    """
+    # Load previous availability
     try:
         with open(previous_data_path, "r") as f:
             prev = json.load(f)
             prev_avail = {itm["name"]: itm["available"] for itm in prev}
     except FileNotFoundError:
         prev_avail = {}
+
     new_items = []
+    new_names_raw = []  # full product names for backend ID mapping
     normal_items = []
     low_items = []
+
     for itm in current_data:
         if int(itm["available"]) != 1:
             continue
+
         name = itm["name"]
-        qty  = itm["inventory_quantity"]
+        qty = itm.get("inventory_quantity", 0)
         disp = short_map.get(name, name)
         was_avail = prev_avail.get(name, 0) == 1
+
         if not was_avail:
+            new_names_raw.append(name)
             new_items.append(disp)
         elif qty <= low_stock_threshold:
             low_items.append(disp)
         else:
             normal_items.append(disp)
+
+    # No changes = no tweet = no notification
     if not has_changes(prev, current_data):
-        print("No changes- not updating json")
-        return
+        # print("No changes—skipping update & tweet")
+        return None, [], current_data
+
+    # Save current state to JSON
     print("Saving new availability data")
     with open(previous_data_path, "w") as f:
         json.dump(current_data, f)
-    lines = ["Amul Protein Stock Update 🐄\n","✅ Available:"]
+
+    # Build tweet
+    lines = ["Amul Protein Stock Update 🐄", "✅ Available:"]
     for d in new_items:
         lines.append(f"{d}🆕")
     for d in normal_items:
-        lines.append(f"{d}")
+        lines.append(d)
     for d in low_items:
         lines.append(f"{d}⚠️")
+
     tweet = "\n".join(lines)
     if len(tweet) > 275:
         tweet = tweet[:270] + "tbc"
-    return tweet
+
+    return tweet, new_names_raw, current_data
 
 def post_tweet(tweet_text):
     url = "https://api.twitter.com/2/tweets"
@@ -97,6 +161,14 @@ def post_tweet(tweet_text):
     else:
         print(f"Failed to post tweet. Status code: {response.status_code}")
         print("Response:", response.text)
+
+#telegram
+import requests
+def post_to_channel(bot_token, channel_username, text):
+    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+    payload = {"chat_id": f"@{channel_username}", "text": text, "parse_mode": "HTML"}
+    resp = requests.post(url, json=payload)
+    return resp.ok
 
 def send_twilio_message(body, to=TO_WHATSAPP, from_=TWILIO_WHATSAPP_NUMBER):
     client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
