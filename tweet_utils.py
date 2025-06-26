@@ -12,6 +12,8 @@ SHORT_NAME_MAP = {
     "Amul Kool Protein Milkshake | Chocolate, 180 mL | Pack of 30": "Kool Choco 180×30",
     "Amul Kool Protein Milkshake | Kesar, 180 mL | Pack of 8":    "Kool Kesar 180×8",
     "Amul Kool Protein Milkshake | Kesar, 180 mL | Pack of 30":   "Kool Kesar 180×30",
+    "Amul Kool Protein Milkshake | Vanilla, 180 mL | Pack of 8":    "Kool Vanilla 180×8",
+    "Amul Kool Protein Milkshake | Vanilla, 180 mL | Pack of 30":   "Kool Vanilla 180×30",
     "Amul Kool Protein Milkshake | Arabica Coffee, 180 mL | Pack of 8":  "Kool Coffee 180×8",
     "Amul Kool Protein Milkshake | Arabica Coffee, 180 mL | Pack of 30": "Kool Coffee 180×30",
     # High-Protein Shakes & Drinks
