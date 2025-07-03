@@ -19,7 +19,7 @@ if __name__ == "__main__":
                 print("urllib failed")
 
                 response= get_amul_data_httpx()
-                if response
+                if response:
                     if len(response["data"])>0:
                         tweet_data = response["data"]
                     else:
