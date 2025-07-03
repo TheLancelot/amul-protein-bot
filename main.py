@@ -11,20 +11,23 @@ if __name__ == "__main__":
         print("first api failed")
         print("trying urllib")
         response= get_amul_data_urllib()
-        if len(response["data"])>0:
-            tweet_data = response["data"]
-        else:
-            print("urllib failed")
 
-            response= get_amul_data_httpx()
+        if response:
             if len(response["data"])>0:
                 tweet_data = response["data"]
             else:
-                print("httpx failed")
-                response = get_amul_data_selenium()
-                if len(response["data"]) == 0:
-                    raise Exception("All APIs Failed")
-                tweet_data = response["data"] if response else []
+                print("urllib failed")
+
+                response= get_amul_data_httpx()
+                if response
+                    if len(response["data"])>0:
+                        tweet_data = response["data"]
+                    else:
+                        print("httpx failed")
+                        response = get_amul_data_selenium()
+                        if len(response["data"]) == 0:
+                            raise Exception("All APIs Failed")
+                        tweet_data = response["data"] if response else []
     
     tweet_text, new_names, _ = generate_amul_tweet(tweet_data)
 
