@@ -33,10 +33,10 @@ if __name__ == "__main__":
                     
                 tweet_data = response["data"] if response else []
     
-
-    tweet_text, new_names, _ = generate_amul_tweet(tweet_data)
-
-    print(f"New item names: {new_names}")
+    if len(tweet_data)>0:
+        tweet_text, new_names, _ = generate_amul_tweet(tweet_data)
+        print(f"New item names: {new_names}")
+        
     if tweet_text:
         print(tweet_text)
 
