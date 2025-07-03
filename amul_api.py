@@ -62,9 +62,8 @@ def get_amul_data_api():
     aurl="https://shop.amul.com/api/1/entity/ms.products?fields[name]=1&fields[brand]=1&fields[categories]=1&fields[collections]=1&fields[alias]=1&fields[sku]=1&fields[price]=1&fields[compare_price]=1&fields[original_price]=1&fields[images]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[inventory_quantity]=1&fields[net_quantity]=1&fields[num_reviews]=1&fields[avg_rating]=1&fields[inventory_low_stock_quantity]=1&fields[inventory_allow_out_of_stock]=1&fields[default_variant]=1&fields[variants]=1&fields[lp_seller_ids]=1&filters[0][field]=categories&filters[0][value][0]=protein&filters[0][operator]=in&filters[0][original]=1&facets=true&facetgroup=default_category_facet&limit=24&total=1&start=0&cdc=1m&substore=66505ff0998183e1b1935c75"
     headers = {
         "authority": "shop.amul.com",
-        "cookie":"_fbp=fb.1.1745925439066.409308632149880130; _ga_XXXXXXXXXX=GS1.1.1746017298.2.1.1746017322.0.0.0; _ga_1DPYKST0SD=GS2.2.s1746711856$o2$g1$t1746711858$j0$l0$h0; _ga=GA1.1.711881172.1745925435; jsessionid=s%3AOtKRreaWv77a4Go7AflEevt%2B.rs0T5hqPnKU0bjDFFGrRDx3QdHqss4PC59WYWchUylc; _ga_E69VZ8HPCN=GS2.1.s1747905489$o22$g1$t1747905567$j60$l0$h1754653961$dwzgxcadd6fliThMomirmVbrj9VApM9tThQ; __cf_bm=_.BNRr.ve1e.gAeCjF_ViuKMZ10PWzmEaxRBL2jBUvQ-1747913133-1.0.1.1-JeX60_Wb2VvNrGbpUdy_xdlx8oMnMK9I9.PWwiPI_JVn5xCOKtyl9CTLTKlwzCFm8nxBOBm.wG9dfxIy5gGPA1lt0FmJ9lGQTPxDEiQVzkw",
-        "if-none-match": 'W/"-1583519405"',
-        "user-agent": "PostmanRuntime/7.43.4"
+        "cookie":"__cf_bm=acmBVs.v4S208Wv.xc6oA5yEqW6eJMD9fuFoN.B5Zto-1751523072-1.0.1.1-Fk1Z2MqzzfVXuYqWhK6NLTOtFIey36JZJ0evePa.cRdlhXboO1aAjiFcamvvx6Zr5AD9mYYDY_Xa6Ei5SM3npebNTJhLKuWrvNbt7tCPrNE",
+        "user-agent": "PostmanRuntime/7.44.1"
     }
 
     response = requests.get(url,params=params,headers=headers,timeout=20)
