@@ -26,8 +26,11 @@ if __name__ == "__main__":
             else:
                 print("httpx failed")
                 response = get_amul_data_selenium()
-                if len(response["data"]) == 0:
-                    raise Exception("All APIs Failed")
+
+                if response:
+                    if len(response["data"]) == 0:  
+                        raise Exception("All APIs Failed")
+                    
                 tweet_data = response["data"] if response else []
     
 
