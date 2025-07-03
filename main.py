@@ -13,7 +13,7 @@ if __name__ == "__main__":
         response= get_amul_data_urllib()
 
         if response:
-            print(response)
+            print("urllib success",response)
             if len(response["data"])>0:
                 tweet_data = response["data"]
             else:
@@ -30,7 +30,7 @@ if __name__ == "__main__":
                             raise Exception("All APIs Failed")
                         tweet_data = response["data"] if response else []
     
-    
+
     tweet_text, new_names, _ = generate_amul_tweet(tweet_data)
 
     print(f"New item names: {new_names}")
