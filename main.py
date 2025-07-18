@@ -4,6 +4,7 @@ from notify import names_to_ids, dispatch_notifications
 
 if __name__ == "__main__":
     response = get_amul_data_api()
+
     if response:
         tweet_data = response["data"]
 
@@ -33,7 +34,7 @@ if __name__ == "__main__":
                     
                 tweet_data = response["data"] if response else []
     
-    if len(tweet_data)>0:
+    if len(tweet_data)>15:
         tweet_text, new_names, _ = generate_amul_tweet(tweet_data)
         print(f"New item names: {new_names}")
         

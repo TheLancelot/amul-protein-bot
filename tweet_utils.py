@@ -131,23 +131,25 @@ def generate_amul_tweet(current_data,previous_data_path="amul_prev_state.json",l
         # print("No changes—skipping update & tweet")
         return None, [], current_data
 
-    # Save current state to JSON
-    print("Saving new availability data")
-    with open(previous_data_path, "w") as f:
-        json.dump(current_data, f)
+    # # Save current state to JSON
 
-    # Build tweet
-    lines = ["Amul Protein Stock Update 🐄", "✅ Available:"]
-    for d in new_items:
-        lines.append(f"{d}🆕")
-    for d in normal_items:
-        lines.append(d)
-    for d in low_items:
-        lines.append(f"{d}⚠️")
+    if len(current_data)>15:
+        print("Saving new availability data")
+        with open(previous_data_path, "w") as f:
+            json.dump(current_data, f)
 
-    tweet = "\n".join(lines)
-    if len(tweet) > 275:
-        tweet = tweet[:270] + "tbc"
+        # Build tweet
+        lines = ["Amul Protein Stock Update 🐄", "✅ Available:"]
+        for d in new_items:
+            lines.append(f"{d}🆕")
+        for d in normal_items:
+            lines.append(d)
+        for d in low_items:
+            lines.append(f"{d}⚠️")
+
+        tweet = "\n".join(lines)
+        if len(tweet) > 275:
+            tweet = tweet[:270] + "tbc"
 
     return tweet, new_names_raw, current_data
 
