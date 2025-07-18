@@ -70,6 +70,7 @@ def get_amul_data_api():
     # response= requests.get(url,params=params,timeout=20)
     if response.status_code == 200 and len(response.json()["data"])>0:
         print("Data fetched successfully!")
+        print(response.json())
         return response.json()
     else:
         print("Failed to fetch data. Status code:", response.status_code)
