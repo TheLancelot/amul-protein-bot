@@ -3,7 +3,7 @@ from tweet_utils import generate_amul_tweet, post_tweet, send_twilio_message,pos
 from notify import names_to_ids, dispatch_notifications
 
 if __name__ == "__main__":
-    response = get_amul_data_api()
+    response = get_amul_data_selenium()
 
     if response:
         tweet_data = response["data"]
@@ -26,7 +26,7 @@ if __name__ == "__main__":
                     tweet_data = response["data"]
             else:
                 print("httpx failed")
-                response = get_amul_data_selenium()
+                response = get_amul_data_api()
 
                 if response:
                     if len(response["data"]) == 0:  
