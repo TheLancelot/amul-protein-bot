@@ -71,8 +71,8 @@ def fetch_subscribers_for(new_ids: list[str]) -> list[dict]:
     )
     return resp.data or []
 
-from products import ID_TO_NAME
-
+from products import ID_TO_NAME, ID_TO_ALIAS
+BASE_URL = "https://shop.amul.com/en/product"
 def dispatch_notifications(new_ids: list[str]):
     subs = fetch_subscribers_for(new_ids)
 
@@ -88,12 +88,28 @@ def dispatch_notifications(new_ids: list[str]):
         body = "\n".join(lines)
         
 
-        html_lines = "<br>".join([f"<strong>• {name}</strong>" for name in matched_names])
+        # html_lines = "<br>".join([f"<strong>• {name}</strong>" for name in matched_names])
+        # html_body = f"""
+        # <p>
+        # Good news!<br>
+        # The following products you subscribed to are back in stock:<br><br>
+        # {html_lines}
+        # </p>
+        # """
+
+        # HTML email with hyperlinks
+        html_lines = "<br>".join([
+            f'<strong>• <a href="{BASE_URL}/{ID_TO_ALIAS[_id]}" '
+            f'target="_blank">{ID_TO_NAME[_id]}</a></strong>'
+            for _id in matched_ids
+        ])
         html_body = f"""
         <p>
-        Good news!<br>
-        The following products you subscribed to are back in stock:<br><br>
-        {html_lines}
+          Good news!<br>
+          The following products you subscribed to are back in stock:<br><br>
+          {html_lines}
+
+          Click on the products to get them ASAP!
         </p>
         """
 
