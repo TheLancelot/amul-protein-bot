@@ -108,7 +108,7 @@ def dispatch_notifications(new_ids: list[str]):
           Good news!<br>
           The following products you subscribed to are back in stock:<br><br>
           {html_lines}
-
+          <br><br>
           Click on the products to get them ASAP!
         </p>
         """
