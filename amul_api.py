@@ -9,60 +9,29 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# def get_amul_data_api():
-#     url = AMUL_API
-#     response = requests.get(url,timeout=20)
-#     if response.status_code == 200 and len(response.json().get("data", [])) > 0:
-#         print("Data fetched successfully!")
-#         return response.json()
-#     else:
-#         print("Failed to fetch data. Status code:", response.status_code)
-#         return None
 import requests
 def get_amul_data_api():
-    url = "https://shop.amul.com/api/1/entity/ms.products"
-    params = {
-        "fields[name]": 1,
-        "fields[brand]": 1,
-        "fields[categories]": 1,
-        "fields[collections]": 1,
-        "fields[alias]": 1,
-        "fields[sku]": 1,
-        "fields[price]": 1,
-        "fields[compare_price]": 1,
-        "fields[original_price]": 1,
-        "fields[images]": 1,
-        "fields[metafields]": 1,
-        "fields[discounts]": 1,
-        "fields[catalog_only]": 1,
-        "fields[is_catalog]": 1,
-        "fields[seller]": 1,
-        "fields[available]": 1,
-        "fields[inventory_quantity]": 1,
-        "fields[net_quantity]": 1,
-        "fields[num_reviews]": 1,
-        "fields[avg_rating]": 1,
-        "fields[inventory_low_stock_quantity]": 1,
-        "fields[inventory_allow_out_of_stock]": 1,
-        "fields[default_variant]": 1,
-        "fields[variants]": 1,
-        "fields[lp_seller_ids]": 1,
-        "filters[0][field]": "categories",
-        "filters[0][value][0]": "protein",
-        "filters[0][operator]": "in",
-        "filters[0][original]": 1,
-        "facets": "true",
-        "facetgroup": "default_category_facet",
-        "limit": 24,
-        "total": 1,
-        "start": 0
-    }
     aurl="https://shop.amul.com/api/1/entity/ms.products?fields[name]=1&fields[brand]=1&fields[categories]=1&fields[collections]=1&fields[alias]=1&fields[sku]=1&fields[price]=1&fields[compare_price]=1&fields[original_price]=1&fields[images]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[inventory_quantity]=1&fields[net_quantity]=1&fields[num_reviews]=1&fields[avg_rating]=1&fields[inventory_low_stock_quantity]=1&fields[inventory_allow_out_of_stock]=1&fields[default_variant]=1&fields[variants]=1&fields[lp_seller_ids]=1&filters[0][field]=categories&filters[0][value][0]=protein&filters[0][operator]=in&filters[0][original]=1&facets=true&facetgroup=default_category_facet&limit=24&total=1&start=0"
     headers = {
-        "authority": "shop.amul.com",
-        "cookie":"__cf_bm=acmBVs.v4S208Wv.xc6oA5yEqW6eJMD9fuFoN.B5Zto-1751523072-1.0.1.1-Fk1Z2MqzzfVXuYqWhK6NLTOtFIey36JZJ0evePa.cRdlhXboO1aAjiFcamvvx6Zr5AD9mYYDY_Xa6Ei5SM3npebNTJhLKuWrvNbt7tCPrNE",
-        "user-agent": "PostmanRuntime/7.44.1"
-    }
+    "authority": "shop.amul.com",
+    "method": "GET",
+    "path": "/api/1/entity/ms.products?fields[name]=1&fields[brand]=1&fields[categories]=1&fields[collections]=1&fields[alias]=1&fields[sku]=1&fields[price]=1&fields[compare_price]=1&fields[original_price]=1&fields[images]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[inventory_quantity]=1&fields[net_quantity]=1&fields[num_reviews]=1&fields[avg_rating]=1&fields[inventory_low_stock_quantity]=1&fields[inventory_allow_out_of_stock]=1&fields[default_variant]=1&fields[variants]=1&fields[lp_seller_ids]=1&filters[0][field]=categories&filters[0][value][0]=protein&filters[0][operator]=in&filters[0][original]=1&facets=true&facetgroup=default_category_facet&limit=24&total=1&start=0",
+    "scheme": "https",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Cookie": "_fbp=fb.1.1745925439066.409308632149880130; _ga_XXXXXXXXXX=GS1.1.1746017298.2.1.1746017322.0.0.0; _ga_1DPYKST0SD=GS2.2.s1746711856$o2$g1$t1746711858$j0$l0$h0; _ga=GA1.1.711881172.1745925435; jsessionid=s%3A%2FYTblr9GJpHoi7gD1bm8WyWs.rTIpD3dGSg9WuxLMvP7m%2BTU2BC4awBLSZOqVB8IXTa4; _ga_E69VZ8HPCN=GS2.1.s1755021670$o52$g1$t1755022646$j60$l0$h490980856",
+    "Priority": "u=0, i",
+    "Sec-Ch-Ua": '"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"',
+    "Sec-Ch-Ua-Mobile": "?0",
+    "Sec-Ch-Ua-Platform": '"Windows"',
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+}
 
     # response = requests.get(url,params=params,headers=headers,timeout=20)
     response= requests.get(aurl,headers=headers,timeout=20)
@@ -125,13 +94,25 @@ def get_amul_data_urllib():
     url="https://shop.amul.com/api/1/entity/ms.products?fields[name]=1&fields[brand]=1&fields[categories]=1&fields[collections]=1&fields[alias]=1&fields[sku]=1&fields[price]=1&fields[compare_price]=1&fields[original_price]=1&fields[images]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[inventory_quantity]=1&fields[net_quantity]=1&fields[num_reviews]=1&fields[avg_rating]=1&fields[inventory_low_stock_quantity]=1&fields[inventory_allow_out_of_stock]=1&fields[default_variant]=1&fields[variants]=1&fields[lp_seller_ids]=1&filters[0][field]=categories&filters[0][value][0]=protein&filters[0][operator]=in&filters[0][original]=1&facets=true&facetgroup=default_category_facet&limit=24&total=1&start=0"
 
     headers = {
-    'referer': 'https://shop.amul.com/',
     "authority": "shop.amul.com",
     "method": "GET",
+    "path": "/api/1/entity/ms.products?fields[name]=1&fields[brand]=1&fields[categories]=1&fields[collections]=1&fields[alias]=1&fields[sku]=1&fields[price]=1&fields[compare_price]=1&fields[original_price]=1&fields[images]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[inventory_quantity]=1&fields[net_quantity]=1&fields[num_reviews]=1&fields[avg_rating]=1&fields[inventory_low_stock_quantity]=1&fields[inventory_allow_out_of_stock]=1&fields[default_variant]=1&fields[variants]=1&fields[lp_seller_ids]=1&filters[0][field]=categories&filters[0][value][0]=protein&filters[0][operator]=in&filters[0][original]=1&facets=true&facetgroup=default_category_facet&limit=24&total=1&start=0",
     "scheme": "https",
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
-    'Accept': 'application/json'
-    }
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Cookie": "_fbp=fb.1.1745925439066.409308632149880130; _ga_XXXXXXXXXX=GS1.1.1746017298.2.1.1746017322.0.0.0; _ga_1DPYKST0SD=GS2.2.s1746711856$o2$g1$t1746711858$j0$l0$h0; _ga=GA1.1.711881172.1745925435; jsessionid=s%3A%2FYTblr9GJpHoi7gD1bm8WyWs.rTIpD3dGSg9WuxLMvP7m%2BTU2BC4awBLSZOqVB8IXTa4; _ga_E69VZ8HPCN=GS2.1.s1755021670$o52$g1$t1755022646$j60$l0$h490980856",
+    "Priority": "u=0, i",
+    "Sec-Ch-Ua": '"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"',
+    "Sec-Ch-Ua-Mobile": "?0",
+    "Sec-Ch-Ua-Platform": '"Windows"',
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+}
     req = urllib.request.Request(url, headers=headers)
     try:
         with urllib.request.urlopen(req) as response:
@@ -147,10 +128,29 @@ import httpx
 
 def get_amul_data_httpx():
     url="https://shop.amul.com/api/1/entity/ms.products?fields[name]=1&fields[brand]=1&fields[categories]=1&fields[collections]=1&fields[alias]=1&fields[sku]=1&fields[price]=1&fields[compare_price]=1&fields[original_price]=1&fields[images]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[inventory_quantity]=1&fields[net_quantity]=1&fields[num_reviews]=1&fields[avg_rating]=1&fields[inventory_low_stock_quantity]=1&fields[inventory_allow_out_of_stock]=1&fields[default_variant]=1&fields[variants]=1&fields[lp_seller_ids]=1&filters[0][field]=categories&filters[0][value][0]=protein&filters[0][operator]=in&filters[0][original]=1&facets=true&facetgroup=default_category_facet&limit=24&total=1&start=0"
-
+    headers = {
+    "authority": "shop.amul.com",
+    "method": "GET",
+    "path": "/api/1/entity/ms.products?fields[name]=1&fields[brand]=1&fields[categories]=1&fields[collections]=1&fields[alias]=1&fields[sku]=1&fields[price]=1&fields[compare_price]=1&fields[original_price]=1&fields[images]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[inventory_quantity]=1&fields[net_quantity]=1&fields[num_reviews]=1&fields[avg_rating]=1&fields[inventory_low_stock_quantity]=1&fields[inventory_allow_out_of_stock]=1&fields[default_variant]=1&fields[variants]=1&fields[lp_seller_ids]=1&filters[0][field]=categories&filters[0][value][0]=protein&filters[0][operator]=in&filters[0][original]=1&facets=true&facetgroup=default_category_facet&limit=24&total=1&start=0",
+    "scheme": "https",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Cookie": "_fbp=fb.1.1745925439066.409308632149880130; _ga_XXXXXXXXXX=GS1.1.1746017298.2.1.1746017322.0.0.0; _ga_1DPYKST0SD=GS2.2.s1746711856$o2$g1$t1746711858$j0$l0$h0; _ga=GA1.1.711881172.1745925435; jsessionid=s%3A%2FYTblr9GJpHoi7gD1bm8WyWs.rTIpD3dGSg9WuxLMvP7m%2BTU2BC4awBLSZOqVB8IXTa4; _ga_E69VZ8HPCN=GS2.1.s1755021670$o52$g1$t1755022646$j60$l0$h490980856",
+    "Priority": "u=0, i",
+    "Sec-Ch-Ua": '"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"',
+    "Sec-Ch-Ua-Mobile": "?0",
+    "Sec-Ch-Ua-Platform": '"Windows"',
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+}
     try:
         with httpx.Client(timeout=10) as client:
-            response = client.get(url)
+            response = client.get(url, headers=headers)
             response.raise_for_status()
             data = response.json()
             print("Products fetched:", len(data.get("data", [])))
