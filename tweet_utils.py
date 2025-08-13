@@ -10,6 +10,7 @@ from twilio.rest import Client
 SHORT_NAME_MAP = {
     # Kool Protein Milkshakes
     "Amul Kool Protein Milkshake | Chocolate, 180 mL | Pack of 30": "Kool Choco 180×30",
+    "Amul Kool Protein Milkshake | Chocolate, 180 mL | Pack of 8": "Kool Choco 180×8",
     "Amul Kool Protein Milkshake | Kesar, 180 mL | Pack of 8":    "Kool Kesar 180×8",
     "Amul Kool Protein Milkshake | Kesar, 180 mL | Pack of 30":   "Kool Kesar 180×30",
     "Amul Kool Protein Milkshake | Vanilla, 180 mL | Pack of 8":    "Kool Vanilla 180×8",
@@ -148,8 +149,8 @@ def generate_amul_tweet(current_data,previous_data_path="amul_prev_state.json",l
             lines.append(f"{d}⚠️")
 
         tweet = "\n".join(lines)
-        if len(tweet) > 275:
-            tweet = tweet[:270] + "tbc"
+        # if len(tweet) > 275:
+        #     tweet = tweet[:270] + "tbc"
 
     return tweet, new_names_raw, current_data
 
